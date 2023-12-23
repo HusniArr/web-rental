@@ -1,0 +1,143 @@
+html,body{
+    margin:0px;
+    padding: 0px;
+}
+.navbar {
+    background-color: #80A3A2;
+}
+
+.brand{
+    color: #fff;
+}
+
+.navbar-brand:hover{
+    color: rgb(166, 207, 242);
+}
+
+.navbar-nav li a.nav-link{
+    color: #fff;
+}
+
+.navbar-nav li a.nav-link:hover{
+    color: rgb(166, 207, 242);
+}
+
+.navbar-nav li a.nav-link:active{
+    color: #7FA6EE;
+}
+
+.copyright{
+    background-color: #80A3A2;
+    color: #fff;
+}
+.divider{
+    border-bottom-style: solid;
+    margin-bottom: 20px;
+}
+#header{
+    /* background: #ECE8D9; */
+    background-image: url('../img/tenor-jaguar.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+#header .title-header, .info{
+    color: #FFFDF6;
+}
+
+#header .info{
+    text-align: justify;
+}
+
+.title-gallery{
+  font-weight: 600;
+  font-size: 2rem; /* 32px*/
+}
+
+
+.divider-gallery{
+    /* width: 12rem; */
+    height: .2rem;
+    border: none;
+    border-radius: .2rem;
+    background: #80A3A2;
+}
+
+.divider-service{
+    /* width: 18rem; */
+    height: .2rem;
+    border: none;
+    border-radius: .2rem;
+    background: #80A3A2;
+}
+
+.divider-contact{
+    /* width: 18rem; */
+    height: .2rem;
+    border: none;
+    border-radius: .2rem;
+    background: #80A3A2;
+}
+
+.card-body.card-service{
+    background-color: #C4DCE0;
+}
+
+#gallery{
+ 
+}
+
+.content-gallery{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.content-gallery  .card-image{
+    border-radius: 4px;
+    background-color: #005691;
+    padding: 4px;
+}
+.content-gallery .card-image img{
+    object-fit: cover;
+    width: 553px;
+    height: 400px;
+}
+#services{
+
+}
+
+#contact{
+   background: #E8F1F5;
+}
+
+footer{
+    
+}
+
+.sosmed a .fa-facebook{
+    color: #005691;
+}
+
+.sosmed a .fa-square-instagram{
+    color: #f03f3f;
+}
+
+.sosmed a .fa-square-x-twitter{
+    color: #1e1f21;
+}
+
+.sosmed a .fa-facebook, .fa-square-instagram, .fa-square-x-twitter{
+    font-size: 36px;
+}
+/* Small devices  */
+@media only screen and (max-width: 768px) {
+    .content-gallery .card-image img{
+        object-fit: cover;
+        width: 200px;
+        height: 100px;
+    }
+}
