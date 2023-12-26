@@ -16,10 +16,11 @@ class User_model extends Database {
 
     public function findByUsername($username)
     {
-        $sql = "SELECT * FROM users WHERE username = :username";
+        $sql = "SELECT * FROM users WHERE username = :username OR email= :email";
 
         $data = array(
-            'username' => $username
+            'username' => $username,
+            'email' => $username
         );
         $this->query($sql, $data);
         return $this->singleSet();

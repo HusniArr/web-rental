@@ -1,6 +1,8 @@
 <?php require(ROOT .DS. 'app' .DS. 'views' .DS. 'partials' .DS. 'header-login.php') ?>
 <?php 
-$errors = $_SESSION['errors'];
+if(isset($_SESSION['errors'])){
+  $errors = $_SESSION['errors'];
+}
 
 ?>
 <div id="loginbox">
@@ -13,14 +15,14 @@ $errors = $_SESSION['errors'];
             <div class="main_input_box">
               <span class="add-on"><i class="icon-user"></i></span
               ><input type="text" placeholder="Username" name="username"/>
+            </div>
              <?php 
-                if(!empty($errors['username'])){
-                    echo '<small>'.$errors['username'].'</small>';
+                if(isset($errors['username'])){
+                    echo '<small style="color:red; margin-left: 20px;">'.$errors['username'].'</small>';
                 } else {
-                    $errors['username'] = null;
+                    unset($errors);
                 }
              ?>
-            </div>
           </div>
         </div>
         <div class="control-group">
@@ -28,14 +30,14 @@ $errors = $_SESSION['errors'];
             <div class="main_input_box">
               <span class="add-on"><i class="icon-lock"></i></span
               ><input type="password" placeholder="Password" name="password"/>
+            </div>
               <?php 
-                if(!empty($errors['password'])){
-                    echo '<small>'.$errors['password'].'</small>';
+                if(isset($errors['password'])){
+                    echo '<small style="color:red;margin-left: 20px;">'.$errors['password'].'</small>';
                 } else {
-                    $errors['password'] = null;
+                     unset($errors);
                 }
              ?>
-            </div>
           </div>
         </div>
         <div class="form-actions">

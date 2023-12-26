@@ -1,6 +1,6 @@
 <!--Header-part-->
 <div id="header">
-    <h1><a href="#">Admin Panel</a></h1>
+    <h5 style="color:#fff; padding:10px;"><?php echo strtoupper($_SESSION['user']->username)?></h5>
 </div>
 <!--close-Header-part-->
 

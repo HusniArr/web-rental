@@ -2,6 +2,10 @@
 
 class Login extends Controller
 {
+    public function __construct()
+    {
+        if(isset($_SESSION['user'])) redirect('/dashboard');
+    }
    
     public function index()
     {
@@ -27,28 +31,26 @@ class Login extends Controller
                 'username' => 'Username tidak boleh kosong'
             ];
         } elseif(empty($pass)) {
-            $errors = [
-                'password' => 'Password tidak boleh kosong'
-            ];
-        }
-
-        // cek jika user salah
-        if(!$user){
-            $errors = [
-                'username' => 'Username atau password salah'
-            ];
-        } else {
-            if(password_verify($pass, $user->pass)){
-                $_SESSION['user'] = $user;
-                redirect('/dashboard');
+            $errors = ['password' => 'Password tidak boleh kosong'];
+        } else{
+            if($user){
+                if(password_verify($pass, $user->pass)){
+                    $_SESSION['user'] = $user;
+                    redirect('/dashboard');
+                } else {
+                    $errors = ['username' => 'Username atau password salah'];
+                }
             } else {
-                redirect('/login');
+                $errors = ['username' => 'Username atau password salah'];
             }
+
         }
 
+        
         $_SESSION['errors'] = $errors;
 
         redirect('/login');
+
       }
     }
 }
