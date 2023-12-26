@@ -15,23 +15,38 @@
       </div>
       <div class="container-fluid">
         <div class="quick-actions_homepage">
-          <ul class="quick-actions">
-            <li>
-              <a href="#"> <i class="icon-dashboard"></i> My Dashboard </a>
-            </li>
-            <li>
-              <a href="#"> <i class="icon-shopping-bag"></i> Shopping Cart</a>
-            </li>
-            <li>
-              <a href="#"> <i class="icon-web"></i> Web Marketing </a>
-            </li>
-            <li>
-              <a href="#"> <i class="icon-people"></i> Manage Users </a>
-            </li>
-            <li>
-              <a href="#"> <i class="icon-calendar"></i> Manage Events </a>
-            </li>
-          </ul>
+          <div class="row-fluid">
+            <div class="span4">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <i class="icon-camera"></i>
+                </div>
+                <div class="widget-content">
+                  20 Galeri
+                </div>
+              </div>
+            </div>
+            <div class="span4">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <i class="icon-user"></i> 
+                </div>
+                <div class="widget-content">
+                  5 Pengguna
+                </div>
+              </div>
+            </div>
+            <div class="span4">
+              <div class="widget-box">
+                <div class="widget-title">
+                  <i class="icon-tasks"></i>
+                </div>
+                <div class="widget-content">
+                  15 Unit
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
