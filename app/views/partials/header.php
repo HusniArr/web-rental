@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="<?php echo APP_URL ?>/assets/css/maruti-media.css" class="skin-color" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png" />
+    <link rel="stylesheet" href="<?php echo APP_URL ?>/assets/DataTables/css/jquery.dataTables.min.css">
+    <script src="<?php echo APP_URL?>/assets/js/jquery.min.js"></script>
   </head>
 
   <body>

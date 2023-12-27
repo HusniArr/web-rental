@@ -9,7 +9,7 @@
           >
         </li>
         <li>
-          <a href="tables.html"
+          <a href="<?php echo APP_PATH ?>/gallery"
             ><i class="icon icon-picture"></i> <span>Galeri</span></a
           >
         </li>

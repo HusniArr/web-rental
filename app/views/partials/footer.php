@@ -5,7 +5,6 @@
 </div>
 
 <script src="<?php echo APP_URL?>/assets/js/excanvas.min.js"></script>
-<script src="<?php echo APP_URL?>/assets/js/jquery.min.js"></script>
 <script src="<?php echo APP_URL?>/assets/js/jquery.ui.custom.js"></script>
 <script src="<?php echo APP_URL?>/assets/js/bootstrap.min.js"></script>
 <script src="<?php echo APP_URL?>/assets/js/jquery.flot.min.js"></script>
@@ -15,6 +14,7 @@
 <script src="<?php echo APP_URL?>/assets/js/maruti.js"></script>
 <script src="<?php echo APP_URL?>/assets/js/maruti.dashboard.js"></script>
 <script src="<?php echo APP_URL?>/assets/js/maruti.chat.js"></script>
+<script src="<?php echo APP_URL?>/assets/DataTables/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     // This function is called from the pop-up menus to transfer to
