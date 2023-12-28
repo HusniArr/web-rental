@@ -75,4 +75,55 @@ class Gallery extends Controller
         $result = $galleryModel->getAll();
         echo json_encode($result);
     }
+
+    public function create()
+    {
+        $data = [
+            'title' => 'Tambah Galeri'
+        ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $galleryModel = $this->model('Gallery_model');
+            $headline = filter_input(INPUT_POST, 'headline', FILTER_DEFAULT);
+            $info = filter_input(INPUT_POST, 'info', FILTER_DEFAULT);
+
+            if($headline == ''){
+                $errors = [
+                    'headline' => 'Tidak ada gambar yang dipilih'
+                ];
+            }
+
+            if(!$_FILES['image'] || $_FILES['image']['size'] == 0){
+                $errors = [
+                    'image' => 'Tidak ada gambar yang dipilih'
+                ];
+
+            } elseif(isset($_FILES['image']) && $_FILES['image']['size'] !== 0){
+                $allowedExt = array('jpg', 'jpeg', 'png');
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $fileName = $_FILES['image']['name'];
+                $storage = ROOT. DS . 'upload' . DS . 'galleries' . DS. $fileName;
+
+                if(!in_array($extension, $allowedExt)){
+                    $errors = [
+                        'image' => 'Gambar tidak didukung'
+                    ];
+                } else {
+                    move_uploaded_file($_FILES['image']['temp_name'], $storage);
+
+                    $galleryModel->create($headline, $info, $fileName);
+                    $_SESSION['success'] = [
+                        'success' =>  true
+                    ];
+                }
+            }
+        
+            $_SESSION['errors'] = $errors;
+            redirect('/gallery/create');
+        } else {
+
+            $this->view('gallery/create', $data);
+        }
+    }
 }

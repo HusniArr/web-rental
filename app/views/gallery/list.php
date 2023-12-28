@@ -7,7 +7,7 @@
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb">
-          <a href="<?php echo APP_URL?>/gallery" title="Go to Gallery" class="tip-bottom"
+          <a href="<?php echo APP_PATH?>/gallery" title="Go to Gallery" class="tip-bottom"
             ><i class="icon-home"></i> Galeri</a
           >
         </div>
@@ -18,7 +18,7 @@
                 <div class="widget-box">
                     
                     <div class="widget-title">
-                        <span class="icon"><a href="#" class="btn btn-mini btn-primary"><i class="icon-plus icon-white"></i>Tambah</a></span>
+                        <span class="icon"><a href="<?php echo APP_PATH ?>/gallery/create" class="btn btn-mini btn-primary"><i class="icon-plus icon-white"></i>Tambah</a></span>
                         <h5>Data Galeri</h5>
                     </div>
                     <div class="widget-content nopadding">
