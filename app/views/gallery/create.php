@@ -4,24 +4,19 @@
   include (ROOT.DS.'app'.DS.'views'.DS.'partials'.DS.'sidebar.php');
 ?>
 
-<?php 
-if(isset($_SESSION['errors'])){
-  $errors = $_SESSION['errors'];
-}
-?>
 <div id="content">
     <div id="content-header">
         <div id="breadcrumb">
           <a href="<?php echo APP_PATH?>/gallery" title="Go to Gallery" class="tip-bottom"
             ><i class="icon-home"></i> Galeri</a
-          >
+          > <span></span> <small><?php echo $title ?></small>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
                 <?php 
-                    if(isset($_SESSION['success']) || ($_SESSION['success'] == true)){
+                    if(isset($_SESSION['success'])){
                         echo '<div class="alert alert-success">Galeri berhasil disimpan</div>';
                     }
                 ?>
@@ -33,17 +28,15 @@ if(isset($_SESSION['errors'])){
                         <h5><?php echo $title ?></h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form action="<?php echo APP_PATH ?>/gallery/create" method="POST" enctype="multipart/form-data" name="basic_validate" id="basic_validate" class="form-horizontal" novalidate="novalidate">
+                        <form action="<?php echo APP_PATH ?>/gallery/store" method="POST" enctype="multipart/form-data" name="basic_validate" id="basic_validate" class="form-horizontal" novalidate="novalidate">
                             <div class="control-group">
                                 <label class="control-label">Headline</label>
                                 <div class="controls">
                                 <input type="text" name="headline" id="headline">
                                     <?php 
-                                        if(isset($errors['headline'])){
-                                            echo '<small style="color:red; margin-left: 20px;">'.$errors['headline'].'</small>';
-                                        } else {
-                                            unset($errors);
-                                        }
+                                        if(isset($error_headline)){
+                                            echo '<small style="color:red; margin-left: 20px;">'.$error_headline.'</small>';
+                                        } 
                                     ?>
                                 </div>
                             </div>
@@ -58,11 +51,9 @@ if(isset($_SESSION['errors'])){
                                 <div class="controls">
                                 <input type="file" name="image" id="image">
                                     <?php 
-                                        if(isset($errors['image'])){
-                                            echo '<small style="color:red; margin-left: 20px;">'.$errors['image'].'</small>';
-                                        } else {
-                                            unset($errors);
-                                        }
+                                        if(isset($error_image)){
+                                            echo '<small style="color:red; margin-left: 20px;">'.$error_image.'</small>';
+                                        } 
                                     ?>
                                 </div>
                             </div>

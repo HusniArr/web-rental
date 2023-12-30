@@ -82,21 +82,27 @@ class Gallery extends Controller
             'title' => 'Tambah Galeri'
         ];
 
+        $this->view('gallery/create', $data);
+       
+    }
+
+    public function store()
+    {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $galleryModel = $this->model('Gallery_model');
             $headline = filter_input(INPUT_POST, 'headline', FILTER_DEFAULT);
             $info = filter_input(INPUT_POST, 'info', FILTER_DEFAULT);
 
-            if($headline == ''){
-                $errors = [
-                    'headline' => 'Tidak ada gambar yang dipilih'
+            if(empty($headline)){
+                $data = [
+                    'error_headline' => 'Tidak ada gambar yang dipilih'
                 ];
             }
 
             if(!$_FILES['image'] || $_FILES['image']['size'] == 0){
-                $errors = [
-                    'image' => 'Tidak ada gambar yang dipilih'
+                $data = [
+                    'error_image' => 'Tidak ada gambar yang dipilih'
                 ];
 
             } elseif(isset($_FILES['image']) && $_FILES['image']['size'] !== 0){
@@ -106,24 +112,19 @@ class Gallery extends Controller
                 $storage = ROOT. DS . 'upload' . DS . 'galleries' . DS. $fileName;
 
                 if(!in_array($extension, $allowedExt)){
-                    $errors = [
-                        'image' => 'Gambar tidak didukung'
+                    $data = [
+                        'error_image' => 'Gambar tidak didukung'
                     ];
                 } else {
                     move_uploaded_file($_FILES['image']['temp_name'], $storage);
 
                     $galleryModel->create($headline, $info, $fileName);
-                    $_SESSION['success'] = [
-                        'success' =>  true
-                    ];
+                    $_SESSION['success'] = true;
                 }
             }
         
-            $_SESSION['errors'] = $errors;
-            redirect('/gallery/create');
-        } else {
-
-            $this->view('gallery/create', $data);
+            $data = ['title' => 'Tambah Galeri'];
+            $this->view('/gallery/create', $data);
         }
     }
 }
