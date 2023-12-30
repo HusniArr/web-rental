@@ -41,7 +41,8 @@ class Gallery extends Controller
                 'db'        => 'id',
                 'dt'        => 'action',
                 'formatter' => function( $d, $row ) {
-                    return '<a class="btn btn-mini btn-warning"><i class="icon-pencil icon-white"></i> Edit</a> <a class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i> Hapus</a>';
+                
+                    return '<a href="'.APP_PATH.'/gallery/edit/'.$d.'" class="btn btn-mini btn-warning"><i class="icon-pencil icon-white"></i> Edit</a> <a href="'.APP_PATH.'/gallery/delete/'.$d.'" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i> Hapus</a>';
                 }
             ),
         );
@@ -91,40 +92,110 @@ class Gallery extends Controller
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $galleryModel = $this->model('Gallery_model');
-            $headline = filter_input(INPUT_POST, 'headline', FILTER_DEFAULT);
-            $info = filter_input(INPUT_POST, 'info', FILTER_DEFAULT);
+            $headline = htmlspecialchars(trim($_POST['headline']));
+            $info = htmlspecialchars(trim($_POST['info']));
 
             if(empty($headline)){
-                $data = [
-                    'error_headline' => 'Tidak ada gambar yang dipilih'
+                $errors = [
+                    'error_headline' => 'Headline harus diisi'
                 ];
-            }
+            } else {
 
-            if(!$_FILES['image'] || $_FILES['image']['size'] == 0){
-                $data = [
-                    'error_image' => 'Tidak ada gambar yang dipilih'
-                ];
-
-            } elseif(isset($_FILES['image']) && $_FILES['image']['size'] !== 0){
-                $allowedExt = array('jpg', 'jpeg', 'png');
-                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $fileName = $_FILES['image']['name'];
-                $storage = ROOT. DS . 'upload' . DS . 'galleries' . DS. $fileName;
-
-                if(!in_array($extension, $allowedExt)){
-                    $data = [
-                        'error_image' => 'Gambar tidak didukung'
+                if(!$_FILES['image'] || $_FILES['image']['size'] == 0){
+                    $errors = [
+                        'error_image' => 'Tidak ada gambar yang dipilih'
                     ];
-                } else {
-                    move_uploaded_file($_FILES['image']['temp_name'], $storage);
-
-                    $galleryModel->create($headline, $info, $fileName);
-                    $_SESSION['success'] = true;
+    
+                } elseif(isset($_FILES['image']) && $_FILES['image']['size'] !== 0){
+                    $allowedExt = array('jpg', 'jpeg', 'png');
+                    $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                    $fileName = $_FILES['image']['name'];
+                    $targetFile = DIR.'public'.DS.'upload'.DS.'galleries'.DS.basename($fileName);
+    
+                    if(!in_array($extension, $allowedExt)){
+                        $errors = [
+                            'error_image' => 'Gambar tidak didukung'
+                        ];
+                    } else {
+                        move_uploaded_file($_FILES['image']['tmp_name'], $targetFile);
+    
+                        $galleryModel->create($headline, $info, $fileName);
+                        $_SESSION['success'] = true;
+                    }
                 }
             }
-        
-            $data = ['title' => 'Tambah Galeri'];
-            $this->view('/gallery/create', $data);
+
+            $_SESSION['errors'] = $errors;
+            
+            redirect('/gallery/create');
         }
+    }
+
+    public function edit($id)
+    {
+        $galleryModel = $this->model('Gallery_model');
+        $data = [
+            'title' => 'Edit Galeri',
+            'result' => $galleryModel->getById($id)
+        ];
+
+        $this->view('gallery/edit', $data);
+    }
+
+    public function update()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $galleryModel = $this->model('Gallery_model');
+            $id = $_POST['gallery_id'];
+            $headline = htmlspecialchars(trim($_POST['headline']));
+            $info = htmlspecialchars(trim($_POST['info']));
+
+            if(empty($headline)){
+                $errors = [
+                    'error_headline' => 'Headline harus diisi'
+                ];
+
+            } else {
+
+                if(!$_FILES['image'] || $_FILES['image']['size'] == 0){
+                    $errors = [
+                        'error_image' => 'Tidak ada gambar yang dipilih'
+                    ];
+    
+                } elseif(isset($_FILES['image']) && $_FILES['image']['size'] !== 0){
+                    $allowedExt = array('jpg', 'jpeg', 'png');
+                    $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                    $fileName = $_FILES['image']['name'];
+                    $targetFile = DIR.'public'.DS.'upload'.DS.'galleries'.DS.basename($fileName);
+    
+                    if(!in_array($extension, $allowedExt)){
+                        $errors = [
+                            'error_image' => 'Gambar tidak didukung'
+                        ];
+                    } else {
+                        move_uploaded_file($_FILES['image']['tmp_name'], $targetFile);
+    
+                        $galleryModel->update($id, $headline, $info, $fileName);
+                        $_SESSION['success_update'] = true;
+
+                        redirect('/gallery');
+                    }
+                }
+            }
+
+            $_SESSION['errors'] = $errors;
+
+            redirect('/gallery/edit/'.$id);          
+        }
+    }
+
+    public function delete($id)
+    {
+        $galleryModel = $this->model('Gallery_model');
+
+        $galleryModel->delete($id);
+        $_SESSION['success_delete'] = true;
+
+        redirect('/gallery');
     }
 }

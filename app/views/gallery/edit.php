@@ -34,11 +34,12 @@
                         <h5><?php echo $title ?></h5>
                     </div>
                     <div class="widget-content nopadding">
-                        <form action="<?php echo APP_PATH ?>/gallery/store" method="POST" enctype="multipart/form-data" name="basic_validate" id="basic_validate" class="form-horizontal" novalidate="novalidate">
+                        <form action="<?php echo APP_PATH ?>/gallery/update" method="POST" enctype="multipart/form-data" name="basic_validate" id="basic_validate" class="form-horizontal" novalidate="novalidate">
                             <div class="control-group">
                                 <label class="control-label">Headline</label>
                                 <div class="controls">
-                                <input type="text" name="headline" id="headline" autocomplete="off">
+                                <input type="hidden" name="gallery_id" value="<?php echo $result->id?>">
+                                <input type="text" name="headline" id="headline" autocomplete="off" value="<?php echo $result->headline ?>">
                                     <?php 
                                         if(isset($errors['error_headline'])){
                                             echo '<small style="color:red; margin-left: 20px;">'.$errors['error_headline'].'</small>';
@@ -49,7 +50,7 @@
                             <div class="control-group">
                                 <label class="control-label">Detail</label>
                                 <div class="controls">
-                                <textarea name="info" id="info" cols="20" rows="5"></textarea>
+                                <textarea name="info" id="info" cols="20" rows="5"><?php echo $result->info ?></textarea>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -64,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <button  type="submit" class="btn btn-success" name="submit">Simpan</button>
+                                <button  type="submit" class="btn btn-success">Simpan</button>
                             </div>
                         </form>
                     </div>

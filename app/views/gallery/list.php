@@ -12,6 +12,7 @@
           >
         </div>
     </div>
+   
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
@@ -51,7 +52,11 @@
             columns: [
                 { data: 'headline' },
                 { data: 'info' },
-                { data: 'image' },
+                { data: 'image',
+                  render: function( data, type, row) {
+                    return '<img src="<?php echo APP_URL ?>/upload/galleries/'+row.image+'" width="100">';
+                  }
+                },
                 { data: 'created_at' },
                 { data: 'action'}
             ],
