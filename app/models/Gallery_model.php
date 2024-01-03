@@ -4,7 +4,7 @@ class Gallery_model extends Database
 {
     public function getAll()
     {
-        $sql = 'SELECT * FROM galleries';
+        $sql = 'SELECT * FROM galleries ORDER BY id DESC';
         $this->query($sql);
         return $this->multipleSet();
     }

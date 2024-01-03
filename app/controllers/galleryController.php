@@ -69,14 +69,6 @@ class Gallery extends Controller
         );
     }
 
-    public function json()
-    {
-        $galleryModel = $this->model('Gallery_model');
-
-        $result = $galleryModel->getAll();
-        echo json_encode($result);
-    }
-
     public function create()
     {
         $data = [
@@ -192,9 +184,13 @@ class Gallery extends Controller
     public function delete($id)
     {
         $galleryModel = $this->model('Gallery_model');
+        $result = $galleryModel->getById($id);
 
-        $galleryModel->delete($id);
-        $_SESSION['success_delete'] = true;
+        if($result){
+            $targetFile = DIR.'public'.DS.'upload'.DS.'galleries'.DS.basename($result->image);
+            unlink($targetFile);
+            $galleryModel->delete($id);
+        }
 
         redirect('/gallery');
     }

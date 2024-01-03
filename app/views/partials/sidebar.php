@@ -13,6 +13,11 @@
             ><i class="icon icon-picture"></i> <span>Galeri</span></a
           >
         </li>
+        <li>
+          <a href="<?php echo APP_PATH ?>/service"
+            ><i class="icon icon-gift"></i> <span>Layanan</span></a
+          >
+        </li>
         <li class="submenu">
           <a href="#"
             ><i class="icon icon-th-list"></i> <span>Master Data</span>
@@ -20,7 +25,6 @@
           >
           <ul>
             <li><a href="#">Pengguna</a></li>
-            <li><a href="#">Kendaraan</a></li>
           </ul>
         </li>
       </ul>
