@@ -12,25 +12,17 @@
         <hr class="divider-gallery d-flex justify-content-center">
         <p>Lihat album perjalanan kami dari tahun ke tahun. Kami memiliki pelayanan prima siap melayani 1 x 24 jam.</p>
         <div class="content-gallery">
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-mobil-ayla.jpg" class="card-img-top" alt="">
-                <small></small>
-            </div>
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-mercy-eclass.jpg" class="card-img-top" alt="">
-            </div>
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-truk2.jpg" class="card-img-top" alt="">
-            </div>
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-truk.jpg" class="card-img-top" alt="">
-            </div>
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-mercy-eclass.jpg" class="card-img-top" alt="">
-            </div>
-            <div class="card-image">
-                <img src="<?php echo APP_URL?>/img/gallery/sewa-truk3.jpg" class="card-img-top" alt="">
-            </div>
+            <?php
+                foreach ($galleries as $key => $row) {
+                    echo '
+                    <div class="card-image">
+                        <img src="'.APP_URL.'/upload/galleries/'.$row->image.'" class="card-img-top" alt="'.$row->headline.'">
+                        <h4>'.$row->headline.'</h4>
+                        <p>'.$row->info.'</p>
+                    </div>
+                    ';
+                }
+            ?>
         </div>
         <a href="" role="button" class="btn btn-sm btn-primary mt-2">Lihat Lagi</a>
     </div>
@@ -40,77 +32,34 @@
         <h1 class="title-service mt-4">LAYANAN KAMI</h1>
         <hr class="divider-service">
         <div class="row mt-2">
-            <div class="col-6">
-                    <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
-                        <img src="<?php echo APP_URL?>/img/gallery/sewa-mobil-ayla.jpg" class="card-img-top" alt="">
-                        <div class="card-body card-service">
-                            <h5 class="card-title placeholder-glow">
-                            Mobil Ayla
-                            </h5>
-                            <p class="card-text placeholder-glow">
-                                Tarif : 1.500.000
-                            </p>
-                            <p class="card-text placeholder-glow">
-                                Menerima orderan antar kota khusus Solo - Yogyakarta
-                            </p>
-                            <a class="btn btn-primary col-6">Order Sekarang</a>
+            <?php 
+                foreach ($services as $key => $row) {
+                    echo '
+                    <div class="col-6">
+                            <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
+                                <img src="'.APP_URL.'/upload/services/'.$row->image.'" class="card-img-top" alt="">
+                                <div class="card-body card-service">
+                                    <h5 class="card-title placeholder-glow">
+                                    '.$row->car_name.'
+                                    </h5>
+                                    <p class="card-text placeholder-glow">
+                                        Tarif : Rp '.number_format($row->cost, 0,',', '.').'
+                                    </p>
+                                    <p class="card-text placeholder-glow">
+                                        '.$row->detail.'
+                                    </p>
+                                    <a href="https://wa.me/+6281277779999" target="_blank" class="btn btn-primary col-6">Order Sekarang</a>
+                                </div>
+                            </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
-                    <img src="<?php echo APP_URL?>/img/gallery/sewa-mercy-eclass.jpg" class="card-img-top" alt="">
-                    <div class="card-body card-service">
-                        <h5 class="card-title placeholder-glow">
-                            Mobil BMW
-                        </h5>
-                        <p class="card-text placeholder-glow">
-                                Tarif : 2.500.000
-                            </p>
-                            <p class="card-text placeholder-glow">
-                                Menerima orderan antar kota khusus Solo - Yogyakarta
-                            </p>
-                        <a class="btn btn-primary col-6" >Order Sekarang</a>
-                </div>
-            </div>
-            </div>
+                    
+                    ';
+                }
+            
+            ?>
+            
         </div>
-        <div class="row mt-2">
-            <div class="col-6">
-                    <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
-                        <img src="<?php echo APP_URL?>/img/service/sewa-truk.jpg" class="card-img-top" alt="">
-                        <div class="card-body card-service">
-                            <h5 class="card-title placeholder-glow">
-                            Mobil Engkel
-                            </h5>
-                            <p class="card-text placeholder-glow">
-                                Tarif : 2.000.000
-                            </p>
-                            <p class="card-text placeholder-glow">
-                                Menerima orderan antar kota khusus Solo - Yogyakarta
-                            </p>
-                            <a class="btn btn-primary col-6">Order Sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
-                    <img src="<?php echo APP_URL?>/img/service/sewa-truk2.jpg" class="card-img-top" alt="">
-                    <div class="card-body card-service">
-                        <h5 class="card-title placeholder-glow">
-                            Truk
-                        </h5>
-                        <p class="card-text placeholder-glow">
-                                Tarif : 2.500.000
-                            </p>
-                            <p class="card-text placeholder-glow">
-                                Menerima orderan antar kota khusus Solo - Yogyakarta
-                            </p>
-                        <a class="btn btn-primary col-6" >Order Sekarang</a>
-                </div>
-            </div>
-            </div>
-        </div>
+        
         <ul class="pagination mt-4">
             <li class="page-item">
             <a class="page-link" href="#" aria-label="Previous">
@@ -135,10 +84,10 @@
     <div class="row">
                 <div class="col-6">
                    <h4>Alamat Kantor</h4>
-                    <ul>
-                        <li>Kantor : Jl. Pangeran Diponegoro KM 101, Kab. Banyumas</li>
-                        <li>Email : admin@pijar.com</li>
-                        <li>Telp/ Hp : 021777999</li>
+                    <ul class="office">
+                        <li><i class="fa-solid fa-map-location"></i> Kantor : Jl. Pangeran Diponegoro KM 101, Kab. Banyumas</li>
+                        <li><i class="fa-solid fa-envelope"></i> Email : admin@pijar.com</li>
+                        <li><i class="fa-solid fa-phone-flip"></i> Telp/ Hp : 021777999</li>
                     </ul>
                     
                 </div>
