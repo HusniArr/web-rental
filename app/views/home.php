@@ -24,7 +24,7 @@
                 }
             ?>
         </div>
-        <a href="" role="button" class="btn btn-sm btn-primary mt-2">Lihat Lagi</a>
+        <a href="#" role="button" class="btn btn-sm btn-primary mt-2">Load More</a>
     </div>
 </div>
 <div id="services">
@@ -35,7 +35,7 @@
             <?php 
                 foreach ($services as $key => $row) {
                     echo '
-                    <div class="col-6">
+                    <div class="col-6 mt-4">
                             <div class="card shadow-lg p-3 bg-body" aria-hidden="true">
                                 <img src="'.APP_URL.'/upload/services/'.$row->image.'" class="card-img-top" alt="">
                                 <div class="card-body card-service">
@@ -61,19 +61,37 @@
         </div>
         
         <ul class="pagination mt-4">
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-            </li>
+            <?php if($page > 1) { ?>
+                <li class="page-item">
+                <a class="page-link" href="<?php echo APP_PATH."/?page=".($page - 1).""; ?>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+            <?php } else { ?>
+                <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+            <?php } ?>    
+
+            <?php for($i=1; $i <= $totalPages; $i++) {?>
+            <li class="page-item <?php echo ($page == $i ) ? 'active' : ''; ?>"><a class="page-link" href="<?php echo APP_PATH."/?page=$i"; ?>"><?php echo $i ?></a></li>
+            <?php } ?>
+
+            <?php if($page < $totalPages) {?>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            <?php } else {?>
+                <li class="page-item disabled">
+                    <a class="page-link" href="<?php echo APP_PATH."/?page=".($page + 1).""; ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
     </div>
 </div>

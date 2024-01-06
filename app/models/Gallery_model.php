@@ -54,4 +54,11 @@ class Gallery_model extends Database
 
         $this->query($sql, $data);
     }
+
+    public function getAllByLimit($offset)
+    {
+        $sql = "SELECT * FROM galleries ORDER BY id DESC LIMIT $offset";
+        $this->query($sql);
+        return $this->multipleSet();
+    }
 }

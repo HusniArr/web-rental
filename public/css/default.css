@@ -110,10 +110,15 @@ html,body{
 .content-gallery .card-image h4{
     color: #fff;
     font-size: 20px;
+    text-align: center;
+    margin: 5px 0px;
+    text-decoration:underline;
 }
 
 .content-gallery .card-image p{
     color: #fff;
+    text-align: justify;
+    font-size: 12px;
 }
 
 #services{

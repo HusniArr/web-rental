@@ -58,4 +58,20 @@ class Service_model extends Database {
 
         $this->query($sql, $data);
     }
+
+    public function getCount()
+    {
+        $sql = 'SELECT * FROM services';
+        $this->query($sql);
+
+        return $this->rowCount();
+    }
+
+    public function getAllByLimit($start, $perPage)
+    {
+        $sql = 'SELECT * FROM services LIMIT '.$perPage.' OFFSET '.$start.' ';
+        $this->query($sql);
+
+        return $this->multipleSet();
+    }
 }
