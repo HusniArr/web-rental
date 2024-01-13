@@ -61,4 +61,11 @@ class Gallery_model extends Database
         $this->query($sql);
         return $this->multipleSet();
     }
+
+    public function loadMore($id)
+    {
+        $sql = "SELECT * FROM galleries WHERE id < $id LIMIT 2";
+        $this->query($sql);
+        return $this->multipleSet();
+    }
 }

@@ -13,6 +13,7 @@
         <p>Lihat album perjalanan kami dari tahun ke tahun. Kami memiliki pelayanan prima siap melayani 1 x 24 jam.</p>
         <div class="content-gallery">
             <?php
+                $galleryId = '';
                 foreach ($galleries as $key => $row) {
                     echo '
                     <div class="card-image">
@@ -21,10 +22,15 @@
                         <p>'.$row->info.'</p>
                     </div>
                     ';
+
+                    $galleryId = $row->id;
                 }
             ?>
+            <div id="remove-row">
+                <button type="button" class="btn btn-sm btn-primary mt-2" id="btn-more" data-id="<?php echo $galleryId ?>">Load More</button>
+
+            </div>
         </div>
-        <a href="#" role="button" class="btn btn-sm btn-primary mt-2">Load More</a>
     </div>
 </div>
 <div id="services">
@@ -123,6 +129,46 @@
 
 </div>
   
+
+<script>
+    $(document).ready(function(){
+        $("#btn-more").on("click", function(){
+            let galleryId = $(this).data("id");
+            let html = '';
+            $("#btn-more").html("Loading...");
+            $.ajax({
+                url: "<?php echo APP_PATH ."/gallery/load_more"?>",
+                method: "POST",
+                data: { gallery_id : galleryId},
+                dataType: 'JSON',
+                success: function(response){
+
+                    if(response != ''){
+                        $("#remove-row").remove();
+                        response.map(function(res){
+                            html += `
+                            <div class="card-image">
+                                <img src="<?php echo APP_URL ."/upload/galleries/"?>${res.image}" class="card-img-top" alt="'.$row->headline.'">
+                                <h4>${res.headline}</h4>
+                                <p>${res.info}</p>
+                            </div>
+                            `;
+                        });
+                        html += `
+                        <div id="remove-row">
+                            <button type="button" class="btn btn-sm btn-primary mt-2" id="btn-more" data-id="<?php echo $galleryId ?>">Load More</button>
+
+                        </div>
+                        `;
+                        $(".content-gallery").append(html);
+                    }else{
+                        $("#btn-more").html("Tidak ada data lagi")
+                    }
+                }
+            })
+        });
+    })
+</script>
 <?php
     include(ROOT . DS . 'app' . DS . 'views' . DS .'includes'. DS .'footer.php');
 ?>

@@ -194,4 +194,16 @@ class Gallery extends Controller
 
         redirect('/gallery');
     }
+
+    public function load_more()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $galleryModel = $this->model('Gallery_model');
+            $id = $_POST['gallery_id'];
+            $result = $galleryModel->loadMore($id);
+    
+            echo json_encode($result);
+        }
+    }
 }
